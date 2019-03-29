@@ -1,0 +1,97 @@
+<div class="fixed">
+  <mat-toolbar class="titlecolor">
+    <span class="title-center">Byju Application</span>
+  </mat-toolbar>
+
+  <div fxLayout="row" fxLayoutAlign="space-around center" fxLayout.lt-lg="column" class="paddingtop30 filcol">
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Choose Provider" [(ngModel)] = "provider">
+          <mat-option *ngFor="let provider of providers" [value] = "provider !== 'Reset' ? provider : undefine" (click) = "update()">
+            {{provider}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Choose University" [(ngModel)] = "university">
+          <mat-option *ngFor="let university of universities" [value] = "university !== 'Reset' ? university : undefine " (click) = "update()">
+            {{university}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Choose Subject" [(ngModel)] = "subject">
+          <mat-option *ngFor="let subject of subjects" [value] = "subject !== 'Reset' ? subject : undefine" (click) = "update()">
+            {{subject}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Child Subject" [(ngModel)] = "chsubject">
+          <mat-option *ngFor="let chsubject of chsubjects" [value] = "chsubject !== 'Reset' ? chsubject : undefine" (click) = "update()">
+            {{chsubject}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+  </div>
+
+  <div fxLayout = "row" fxLayoutAlign="space-around center" fxLayout.lt-lg="column" class = "sortsearchdiv">
+    
+    <div fxFlex = "65" fxFlex.lt-lg>
+      <span style= "font-weight: 400; font-size: 18px; color: #6c757d">Courses Count = {{ datas ? datas.length : '' }}</span>
+    </div>
+      
+    <div fxFlex = "15" fxFlex.lt-lg>
+      <mat-form-field style="font-size: 13px"  class="overidefchild">
+      <mat-select placeholder="Sort By" [(ngModel)] = "sortby">
+        <mat-option *ngFor="let sortby of sortarr" [value] = "sortby !== 'Reset' ? sortby : undefined" (click) = "sortfn()" class="black">
+            {{sortby}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxFlex fxFlex.lt-lg>
+      <div class="input-group">
+        <input class="form-control border-secondary py-2" placeholder="Search" [(ngModel)]="searchString" (keyup.enter)="searchInput()"  (keyup.backspace)="searchInput()">
+          <div class="input-group-append">
+            <button id="mpsb" class="btn btn-outline-secondary border-left-1 border" type="submit" (click)="searchInput()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+
+
+<section class="margin30 paddingtop" fxLayout = "column" fxLayoutGap = "30px">
+  <mat-card *ngFor = "let data of datas">
+    <div fxLayout="row" class="padding20">
+      <div fxLayout="column wrap" fxLayoutAlign="start" fxLayoutGap="10px">
+        <div>Course Id: {{data["Course Id"]}} | Provider: {{data.Provider !== "" ? data.Provider : "NA" }}</div>
+        <div>Course Name: {{data["Course Name"]}}</div>
+        <div>Next Session Date: {{data["Next Session Date"] !== "" ? data["Next Session Date"] : 'NA' }} | Length: {{data.Length ? data.Length + "min" : "NA"}}</div>
+        <div>Url: <a [attr.href]="data.Url" target="_blank">{{data.Url}}</a></div>
+        <div class="urlwrap">Video(Url): <a [attr.href]="data['Video(Url)']" target="_blank">{{data["Video(Url)"] !== "" ? data["Video(Url)"] : "NA"}}</a></div>
+        <div fxHide fxShow.sm fxShow.xs>Universities: {{data.Universities.Institutions !== "" ? data.Universities.Institutions : "NA" }}</div>
+        <div fxHide fxShow.sm fxShow.xs>Parent Subject: {{data["Parent Subject"] !== "" ? data["Parent Subject"] : "NA"}}</div>
+        <div fxHide fxShow.sm fxShow.xs>Child Subject: {{data["Child Subject"] !== "" ? data["Child Subject"] : "NA" }}</div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="10px" class="automargin" fxHide fxShow.md fxShow.lg fxShow.xl >
+        <div>Universities: {{data.Universities.Institutions !== "" ? data.Universities.Institutions : "NA" }}</div>
+        <div>Parent Subject: {{data["Parent Subject"] !== "" ? data["Parent Subject"] : "NA"}}</div>
+        <div>Child Subject: {{data["Child Subject"] !== "" ? data["Child Subject"] : "NA" }}</div>
+      </div>
+    </div>
+  </mat-card>
+</section>

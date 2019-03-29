@@ -1,0 +1,15 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
+/* Add application styles & imports to this file! */
+@import "~jasmine-core/lib/jasmine-core/jasmine.css";
+ 
+* {
+  font-family: Roboto;
+}
+
+body {
+  margin: 0%;
+  background-color: #ececec;
+}
